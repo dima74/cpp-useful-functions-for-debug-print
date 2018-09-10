@@ -20,9 +20,9 @@ const ascii::Color defaultVariableColor = ascii::green;
 ostream &COUT = cout;
 
 template<typename T>
-std::string to_string_with_precision(T t, int n) {
-	std::ostringstream out;
-	out << std::setprecision(n) << t;
+string to_string_with_precision(T t, int n) {
+	ostringstream out;
+	out << setprecision(n) << t;
 	return out.str();
 }
 
@@ -72,16 +72,21 @@ ostream &operator<<(ostream &out, pair<A, B> p) {
 	return out << '{' << p.first << ", " << p.second << '}';
 }
 
+string trimLeft(string s) {
+	s.erase(s.begin(), find_if(s.begin(), s.end(), [](int ch) { return !isspace(ch); }));
+	return s;
+}
+
 template<typename Arg1>
 void myPrint(ostream &out, const char *name, Arg1 &&arg1) {
-	out << colored(name, defaultVariableColor) << "=" << arg1 << endl;
+	out << colored(trimLeft(name), defaultVariableColor) << "=" << arg1 << endl;
 }
 
 template<typename Arg1, typename... Args>
 void myPrint(ostream &out, const char *names, Arg1 &&arg1, Args &&... args) {
 	const char *comma = strchr(names + 1, ',');
-	out << colored(string(names, comma - names), defaultVariableColor) << "=" << arg1;
-	myPrint(out, comma, args...);
+	out << colored(trimLeft(string(names, comma - names)), defaultVariableColor) << "=" << arg1 << ", ";
+	myPrint(out, comma + 1, args...);
 }
 
 #define msg(s) if (!dont) COUT << ((s) + string("\n"))
@@ -134,6 +139,7 @@ void testDbgFunction() {
 	testDbgFunction(string{"abc"}, "abc");
 	testDbgFunction("abc", "abc");
 	testDbgFunction(7, "7");
+	testDbgFunction('7', "7");
 	testDbgFunction(atomic_int{7}, "7");
 	testDbgFunction((void *) 7, "0x7");
 }
