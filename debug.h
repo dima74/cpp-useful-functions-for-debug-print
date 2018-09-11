@@ -46,16 +46,7 @@ long long gettime() {
 void nop() {}
 
 template<typename Iterator>
-ostream &write(ostream &out, Iterator begin, Iterator end) {
-	if (begin == end) {
-		return out << "{}";
-	}
-	out << '{' << *begin;
-	for (Iterator it = ++begin; it != end; ++it) {
-		out << ", " << *it;
-	}
-	return out << '}';
-}
+ostream &write(ostream &out, Iterator begin, Iterator end);
 
 template<template<typename...> typename C, typename... E, typename enable_if<!is_same<C<E...>, string>::value>::type * = nullptr, typename = decltype(declval<C<E...>>().begin())>
 ostream &operator<<(ostream &out, C<E...> c) {
@@ -70,6 +61,18 @@ ostream &operator<<(ostream &out, pair<Iterator, Iterator> c) {
 template<typename A, typename B>
 ostream &operator<<(ostream &out, pair<A, B> p) {
 	return out << '{' << p.first << ", " << p.second << '}';
+}
+
+template<typename Iterator>
+ostream &write(ostream &out, Iterator begin, Iterator end) {
+	if (begin == end) {
+		return out << "{}";
+	}
+	out << '{' << *begin;
+	for (Iterator it = ++begin; it != end; ++it) {
+		out << ", " << *it;
+	}
+	return out << '}';
 }
 
 string trimLeft(string s) {
@@ -121,25 +124,4 @@ void myPrintLabel(string label, const char *names, Args &&... args) {
 	myPrint(ss, names, args...);
 	COUT << ss.str();
 #endif
-}
-
-template<typename T>
-void testDbgFunction(const T &t, string expected) {
-	ostringstream out;
-	out << t;
-	assert(out.str() == expected);
-}
-
-void testDbgFunction() {
-	testDbgFunction(vector<int>{1, 2, 3}, "{1, 2, 3}");
-	testDbgFunction(set<int> {1, 2, 3}, "{1, 2, 3}");
-	testDbgFunction(map<int, int> {{1, 10},
-	                               {2, 20}}, "{{1, 10}, {2, 20}}");
-	testDbgFunction(pair<int, int>{1, 2}, "{1, 2}");
-	testDbgFunction(string{"abc"}, "abc");
-	testDbgFunction("abc", "abc");
-	testDbgFunction(7, "7");
-	testDbgFunction('7', "7");
-	testDbgFunction(atomic_int{7}, "7");
-	testDbgFunction((void *) 7, "0x7");
 }

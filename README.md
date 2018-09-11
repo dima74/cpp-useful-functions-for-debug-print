@@ -2,6 +2,8 @@
 
 > Generally for use in competitive programming
 
+[![Build Status](https://travis-ci.com/dima74/cpp-useful-functions-for-debug-print.svg?branch=master)](https://travis-ci.com/dima74/cpp-useful-functions-for-debug-print)
+
 # Usage
 
 Include `debug.h`:
