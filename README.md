@@ -30,33 +30,43 @@ And you will get nice colored output! (See gallery and examples sections below)
 
 1. Simple
 
-        int foo = 1;
-        int bar = 2;
-        string str = "abc";
-        char ch = '#';
-        dbg(foo, bar, str, ch);
+    ```
+    int foo = 1;
+    int bar = 2;
+    string str = "abc";
+    char ch = '#';
+    dbg(foo, bar, str, ch);
+    ```
 
 2. Vector
 
-        vector<int> simpleVector = {1, 2, 3};
-        dbg(simpleVector);
+    ```
+    vector<int> simpleVector = {1, 2, 3};
+    dbg(simpleVector);
+    ```
 
 3. Map
 
-        map<int, int> simpleMap = {{1, 10},
-                                   {2, 20}};
-        dbg(simpleMap);
+    ```
+    map<int, int> simpleMap = {{1, 10},
+                               {2, 20}};
+    dbg(simpleMap);
+    ```
 
 4. Pair 
 
-        pair<int, int> simplePair = {1, 2};
-        dbg(simplePair);
+    ```
+    pair<int, int> simplePair = {1, 2};
+    dbg(simplePair);
+    ```
 
 5. Inner vector
 
-        vector<vector<int>> innerVector = {{1, 2, 3},
-                                           {4, 5, 6}};
-        dbg(innerVector);
+    ```
+    vector<vector<int>> innerVector = {{1, 2, 3},
+                                       {4, 5, 6}};
+    dbg(innerVector);
+    ```
 
 # Gallery
 
