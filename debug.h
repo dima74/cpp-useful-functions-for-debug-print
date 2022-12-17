@@ -116,12 +116,10 @@ int getthreadnumber() {
 
 template<typename... Args>
 void myPrintLabel(string label, const char *names, Args &&... args) {
-#ifdef LOCAL
 	if (dont) return;
 	ostringstream ss;
 	ss << label;
 	if (multi) ss << "#" << getthreadnumber() << " " << gettimestring() << " " << label;
 	myPrint(ss, names, args...);
 	COUT << ss.str();
-#endif
 }
